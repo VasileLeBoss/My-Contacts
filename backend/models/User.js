@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const contactSchema = new mongoose.Schema({
 
     phoneNumber:{ type: String, required: true, trim:true, unique: true},
-
     firstName:{ type:String, required:true, trim:true },
     lastName:{ type:String, required:true, trim:true },
 
@@ -23,7 +22,7 @@ const userSchema = new mongoose.Schema({
     firstName:{ type:String, required:true, trim:true },
     lastName:{ type:String, required:true, trim:true },
 
-    contacts:{ type: contactSchema, default: () => ({})},
+    contacts: { type: [contactSchema], default: [] },
 
     createdAt: { type: Date, default: Date.now },
 

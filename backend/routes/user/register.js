@@ -28,7 +28,6 @@ router.post('/', async (req, res) => {
 
     // mdp
     const hashedPassword = await bcrypt.hash(password, 10);
-    password = '';
 
     // user creation
     const user = new User({
@@ -37,7 +36,7 @@ router.post('/', async (req, res) => {
       password: hashedPassword,
       firstName,
       lastName,
-      contacts:{}
+      contacts: []
     });
 
     // enregistrement

@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API MyContacts",
+    "version": "1.0.0",
+    "description": "Documentation des routes de l'application MyContacts"
+  },
+  "servers": [
+    { "url": "http://localhost:5000/api" }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Créer un nouvel utilisateur",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "user@example.com" },
+                  "phoneNumber": { "type": "string", "example": "0601020304" },
+                  "password": { "type": "string", "example": "MotDePasse123" },
+                  "firstName": { "type": "string", "example": "John" },
+                  "lastName": { "type": "string", "example": "Doe" }
+                },
+                "required": ["email", "phoneNumber", "password", "firstName", "lastName"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Utilisateur créé avec succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Utilisateur créé avec succès" },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string", "example": "64fd6e1b8a7c1234567890ab" },
+                        "email": { "type": "string", "example": "user@example.com" },
+                        "phoneNumber": { "type": "string", "example": "0601020304" },
+                        "firstName": { "type": "string", "example": "John" },
+                        "lastName": { "type": "string", "example": "Doe" },
+                        "contacts": { "type": "object", "example": {} }
+                      }
+                    },
+                    "token": { "type": "string", "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email ou téléphone déjà utilisé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "field": { "type": "string", "example": "email" },
+                    "error": { "type": "string", "example": "L'e-mail que vous avez fourni est déjà associé à un compte." }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erreur serveur lors de l'inscription",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Erreur serveur lors de l'inscription" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
