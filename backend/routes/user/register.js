@@ -7,6 +7,10 @@ const User = require('../../models/User');
 router.post('/', async (req, res) => {
   const { email, password ,lastName, firstName, phoneNumber} = req.body
 
+  if (!email || !password || !firstName || !lastName || !phoneNumber) {
+    return res.status(400).json({ error: "Tous les champs sont requis" });
+  }
+
   try {
     const existingUser = await User.findOne({
       $or: [{email}, {phoneNumber}]
@@ -67,14 +71,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).json({
       message: 'Utilisateur créé avec succès',
-      user: {
-        id: user._id,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        contacts: user.contacts
-      },
+      user: tokenPayload,
       token 
     });
     
