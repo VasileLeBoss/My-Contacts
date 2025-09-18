@@ -19,5 +19,52 @@
             background-color: var(--mauve);
         }
 
+        &:disabled{
+            background-color: var(--gray-light);
+            cursor: not-allowed;
+        }
+
+    }
+
+    div:has(.spinner){
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .spinner {
+        border: 3px solid var(--gray);
+        border-left-color: var(--black);
+        margin-right: 6px;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        animation: spin 1s linear infinite;
+        
+        vertical-align: middle;
+
+        &.margin-right{
+            margin-right: 8px;
+        }
+    }
+
+    .spinner {
+        -webkit-animation: spin 1s linear infinite;
+        animation: spin 1s linear infinite;
+    }
+
+}
+
+
+
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }
