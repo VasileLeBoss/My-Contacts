@@ -1,0 +1,51 @@
+.register-page{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 124px;
+    flex-direction: column;
+    max-width: 400px;
+
+    .header{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+
+        p{
+            text-align: center;
+            color: var(--gray);
+        }
+    }
+    .content{
+        margin-top: 36px;
+        width: 100%;
+        
+    }
+    .footer{
+        margin-top: 16px;
+        p {
+            display: flex;
+            gap: 6px;
+
+            span{
+                color: var(--gray);
+            }
+
+            a{
+                text-decoration: none;
+                color: var(--persian-indigo);
+
+                &:hover{
+                    text-decoration: underline;
+                    color: var(--tekhelet);
+                }
+            }
+        }
+    }
+    h1{
+        width: fit-content;
+        text-align: center;
+    }
+}

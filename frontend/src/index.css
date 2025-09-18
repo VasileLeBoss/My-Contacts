@@ -7,13 +7,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
 }
-
+h1,h2,h3,h4,h5{
+  font-family: "Nunito", sans-serif;
+}
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+.conteiner{
+  width: 100%;
+  max-width: 1200px ;
+  margin-inline: auto;
+
+}
+
 :root{
-  
+  --russian-violet:#10002B;
+  --russian-violet-2:#240046;
+  --persian-indigo:#3C096C;
+  --tekhelet:#5A189A;
+  --french-violet:#7B2CBF;
+  --amethyst:#9D4EDD;
+  --heliotrope:#C77DFF;
+  --mauve:#E0AAFF;
+  --white:#ffffff;
+  --black:#070707;
+  --gray: #666666;
+  --gray-light:#C2C2C2;
 }

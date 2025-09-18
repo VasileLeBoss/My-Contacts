@@ -18,9 +18,7 @@ function AppContent() {
   });
 
   return(
-    <div className='app-conateiner'>
-        <header>Ici header</header>
-        
+    <div className='app-conateiner'> 
         <Routes>
             <Route path="/" 
               element={ 
@@ -29,11 +27,10 @@ function AppContent() {
                   : <Navigate to="/login" replace /> 
               }  
             />
-            <Route path='/register' element={<RegisterPage setUser={setUser} />}/>
-            <Route path='/login' element={<LoginPage setUser={setUser} />}/>
+            <Route path='/register' element={<RegisterPage user={user} setUser={setUser} />}/>
+            <Route path='/login' element={<LoginPage user={user} setUser={setUser} />}/>
             <Route path='/dashboard' element={<Dashboard user={user} setUser={setUser} />} />
         </Routes>
-
     </div>
   )
 }

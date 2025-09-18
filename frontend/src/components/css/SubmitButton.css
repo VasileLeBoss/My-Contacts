@@ -1,0 +1,23 @@
+
+.button-conteiner{
+    display: flex;
+    width: 100%;
+    margin-top: 16px;
+
+    .button-submit{
+        width: 100%;
+        border-radius: 32px;
+        border: 0;
+        padding:  12px;
+        font-family: "Nunito", sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: var(--heliotrope) ;
+        color: var(--black);
+
+        &:hover{
+            background-color: var(--mauve);
+        }
+
+    }
+}
