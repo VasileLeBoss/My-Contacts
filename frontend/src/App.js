@@ -1,24 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useState } from 'react'
+
+// pages
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import Dashboard from './pages/Dashboard';
+
+function AppContent() {
+
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('user'));
+    } catch {
+      return null;
+    }
+  });
+
+  return(
+    <div className='app-conateiner'>
+        <header>Ici header</header>
+        
+        <Routes>
+            <Route path="/" 
+              element={ 
+                !user 
+                  ? <Navigate to="/dashboard" replace /> 
+                  : <Navigate to="/login" replace /> 
+              }  
+            />
+            <Route path='/register' element={<RegisterPage setUser={setUser} />}/>
+            <Route path='/login' element={<LoginPage setUser={setUser} />}/>
+            <Route path='/dashboard' element={<Dashboard user={user} setUser={setUser} />} />
+        </Routes>
+
+    </div>
+  )
+}
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <AppContent />
+    </Router>
   );
 }
 

@@ -1,6 +1,6 @@
 ### Projet ReactJs
 
-[![ReactJs](https://img.shields.io/badge/react-js)]
+[![ReactJs](https://img.shields.io/badge/react-js)](https://react.dev/)
 
 Développer une application web **fullstack JavaScript** (React + Node/Express + MongoDB) permettant à chaque utilisateur de gérer son carnet de contacts personnel.
 

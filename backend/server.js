@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const app = express();
 const isProd = process.env.NODE_ENV === "prod";
-const apiRoutes = require('./api');
+const apiRoutes = require('./routes');
 
 app.use(cors({
     origin: ['http://localhost:3000'],
