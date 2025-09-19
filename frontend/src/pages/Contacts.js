@@ -3,10 +3,7 @@ import './css/Layaut.css';
 import Menu from '../components/Menu';
 
 
-function Profile({user, setUser}) {
-
-
-    const [ contacts, setContacts] = useState([]);
+function Contacts({user, setUser}) {
 
     return(
         <div className="layaut conteiner">
@@ -14,11 +11,11 @@ function Profile({user, setUser}) {
                 <Menu user={user} setUser={setUser} />
 
                 <h1>
-                    Profile
+                    Contacts
                 </h1>
             </div>
         </div>
     )
 }
 
-export default Profile;
+export default Contacts;

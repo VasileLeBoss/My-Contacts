@@ -6,6 +6,7 @@ import { useState } from 'react'
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import Profile from './pages/Profile';
+import Contacts from './pages/Contacts';
 
 function AppContent() {
 
@@ -18,18 +19,33 @@ function AppContent() {
   });
 
   return(
-    <div className='app-conateiner'> 
+    <div className={`app-conateiner ${ user ? 'bg-gray':''}`}> 
         <Routes>
-            <Route path="/" 
-              element={ 
-                !user 
-                  ? <Navigate to="/login" replace /> 
-                  : <Navigate to="/profile" replace /> 
-              }  
+            {/* Route racine */}
+            <Route 
+              path="/" 
+              element={user ? <Navigate to="/profile" replace /> : <Navigate to="/login" replace />} 
             />
-            <Route path='/register' element={<RegisterPage user={user} setUser={setUser} />}/>
-            <Route path='/login' element={<LoginPage user={user} setUser={setUser} />}/>
-            <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
+
+            {/* Routes publiques */}
+            <Route 
+              path="/login" 
+              element={!user ? <LoginPage user={user} setUser={setUser} /> : <Navigate to="/profile" replace />} 
+            />
+            <Route 
+              path="/register" 
+              element={!user ? <RegisterPage user={user} setUser={setUser} /> : <Navigate to="/profile" replace />} 
+            />
+            
+            {/* Route privée */}
+            <Route 
+              path="/profile" 
+              element={user ? <Profile user={user} setUser={setUser} /> : <Navigate to="/login" replace />} 
+            />
+            <Route 
+              path="/contacts" 
+              element={user ? <Contacts user={user} setUser={setUser} /> : <Navigate to="/login" replace />} 
+            />
         </Routes>
     </div>
   )

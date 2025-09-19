@@ -44,17 +44,19 @@ router.post('/', async (req, res) =>{
         {expiresIn: '1d'}
     );
 
-    res.cookie('token', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'prod', 
-        sameSite: 'Strict',
-        maxAge: 24 * 60 * 60 * 1000, 
-        path: '/'
-    });
+
+    // res.cookie('token', token, {
+    //     httpOnly: true,
+    //     secure: process.env.NODE_ENV === 'prod', 
+    //     sameSite: 'Strict',
+    //     maxAge: 24 * 60 * 60 * 1000, 
+    //     path: '/'
+    // });
 
     res.status(200).json({
         message: "Utilisateur connecté",
         user: tokenPayload,
+        token
     });
 
 });

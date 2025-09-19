@@ -1,10 +1,8 @@
 import './css/RegisterPage.css';
-import '../index.css';
 import Input from '../components/Input';
 import SubmitButton from '../components/SubmitButton';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-
 
 function LoginPage({user, setUser}) {
 
@@ -78,26 +76,24 @@ function LoginPage({user, setUser}) {
             const res = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
+                credentials:'omit'
             });
 
             const data = await res.json();
 
-            if(!res.ok){
-                if(data.field && data.error){
-                    setErrors(
-                        prev =>({
-                            ...prev,
-                            [data.field]:data.error
-                        })
-                    );
+            if (!res.ok) {
+                if (data.field && data.error) {
+                    setErrors(prev => ({ ...prev, password: data.error }));
                 } else {
-                    alert("Erreur serveur : " + (data.error || "Unknown error"));
+                    setErrors(prev => ({ ...prev, password: data.error || 'Erreur inconnue' }));
                 }
-            } else{
-                localStorage.setItem('user', JSON.stringify(data.user))
+                setFormData(prev => ({ ...prev, password: '' }));
+            } else {
+                localStorage.setItem('user', JSON.stringify(data.user));
+                localStorage.setItem('token', JSON.stringify(data.token));
                 setUser(data.user);
-                navigate('/profile')
+                navigate('/profile', { replace: true });
             }
 
         } catch (error) {
@@ -124,10 +120,10 @@ function LoginPage({user, setUser}) {
             <form onSubmit={handleSubmit} className='form'>
                 <div className="content">
                     <Input type="email" onChange={handleChange} name="email" value={formData.email} label="Email" placeholder="Votre email" required autoFocus error={errors.email} />
-                    <Input type="password" onChange={handleChange} name="password" value={formData.password} label="Mot de passe" placeholder="Mot de passe" required />
+                    <Input type="password" onChange={handleChange} name="password" value={formData.password} label="Mot de passe" placeholder="Mot de passe" required error={errors.password} />
                 </div>
                 
-                <SubmitButton label="S'inscrire" loading={loading} disabled={ loading || isDisabled}/>
+                <SubmitButton label="Se connecter" loading={loading} disabled={ loading || isDisabled}/>
             </form>
             <div className='footer'>
                 <p><span>Vous avez pas un compte ?</span><Link to="/register">S'inscrire</Link> </p>

@@ -49,6 +49,7 @@ router.post('/', async (req, res) => {
     const tokenPayload = {
       id: user._id,
       email: user.email,
+      phoneNumber: user.phoneNumber,
       firstName: user.firstName,
       lastName: user.lastName,
     };
@@ -59,17 +60,18 @@ router.post('/', async (req, res) => {
       {expiresIn: '1d'}
     );
 
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'prod', 
-      sameSite: 'Strict',
-      maxAge: 24 * 60 * 60 * 1000, 
-      path: '/'
-    });
+    // res.cookie('token', token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === 'prod', 
+    //   sameSite: 'Strict',
+    //   maxAge: 24 * 60 * 60 * 1000, 
+    //   path: '/'
+    // });
 
     res.status(201).json({
       message: 'Utilisateur créé avec succès',
       user: tokenPayload,
+      token
     });
     
   } catch (error) {

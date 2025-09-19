@@ -20,7 +20,6 @@ h1,h2,h3,h4,h5{
   width: 100%;
   max-width: 1200px ;
   margin-inline: auto;
-
 }
 
 :root{
@@ -36,5 +35,7 @@ h1,h2,h3,h4,h5{
   --black:#070707;
   --gray: #666666;
   --gray-light:#C2C2C2;
+  --gray-light-2:#fbfbfb;
   --red:#f30f0f;
+  --menu-width:240px;
 }

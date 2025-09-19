@@ -1,0 +1,12 @@
+.layaut{
+    min-height: 100dvh;
+    
+    display: flex;
+
+    .grid{
+        position: relative;
+        width: 100%;
+        margin-left: var(--menu-width) ;
+        padding-inline: 32px;
+    }
+}

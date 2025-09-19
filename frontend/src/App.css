@@ -3,3 +3,7 @@
     /* min-height: 100dvh; */
     padding-inline: 16px;
 }
+
+.bg-gray{
+    background-color: var(--gray-light-2);
+}

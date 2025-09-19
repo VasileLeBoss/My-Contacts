@@ -1,5 +1,4 @@
 import './css/RegisterPage.css';
-import '../index.css';
 import Input from '../components/Input';
 import SubmitButton from '../components/SubmitButton';
 import { useState } from 'react';
@@ -99,10 +98,19 @@ function RegisterPage({ setUser }) {
         // Validation locale
         const validationError = validate(name, value);
 
-        setErrors(prev => ({
-            ...prev,
-            [name]: validationError
-        }));
+        if (name === 'password' || name === 'confirmPassword') {
+            const confirmError = validate('confirmPassword', name === 'confirmPassword' ? value : formData.confirmPassword);
+            setErrors(prev => ({
+                ...prev,
+                [name]: validationError,
+                confirmPassword: confirmError
+            }));
+        } else {
+            setErrors(prev => ({
+                ...prev,
+                [name]: validationError
+            }));
+        }
     };
 
     const handleSubmit = async (e) =>{
@@ -127,31 +135,29 @@ function RegisterPage({ setUser }) {
             return;
         }
 
-        try {
-            
+        try {   
+
             const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
+                credentials:'omit'
+                
             });
 
             const data = await res.json();
 
-            if(!res.ok){
-                if(data.field && data.error){
-                    setErrors(
-                        prev =>({
-                            ...prev,
-                            [data.field]:data.error
-                        })
-                    );
+            if (!res.ok) {
+                if (data.field && data.error) {
+                    setErrors(prev => ({ ...prev, [data.field]: data.error }));
                 } else {
                     alert("Erreur serveur : " + (data.error || "Unknown error"));
                 }
-            } else{
-                localStorage.setItem('user', JSON.stringify(data.user))
+                } else {
+                localStorage.setItem('user', JSON.stringify(data.user));
+                localStorage.setItem('token', JSON.stringify(data.token));
                 setUser(data.user);
-                navigate('/profile')
+                navigate('/profile', { replace: true });
             }
 
         } catch (error) {
