@@ -2,14 +2,15 @@ import './css/RegisterPage.css';
 import '../index.css';
 import Input from '../components/Input';
 import SubmitButton from '../components/SubmitButton';
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+
 
 function RegisterPage({ setUser }) {
 
     const [loading, setLoading] = useState(false);
     
-    
+    const navigate = useNavigate();
 
     // data form
     const [formData, setFormData] = useState({
@@ -126,7 +127,38 @@ function RegisterPage({ setUser }) {
             return;
         }
 
-        alert('data send here');
+        try {
+            
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await res.json();
+
+            if(!res.ok){
+                if(data.field && data.error){
+                    setErrors(
+                        prev =>({
+                            ...prev,
+                            [data.field]:data.error
+                        })
+                    );
+                } else {
+                    alert("Erreur serveur : " + (data.error || "Unknown error"));
+                }
+            } else{
+                localStorage.setItem('user', JSON.stringify(data.user))
+                setUser(data.user);
+                navigate('/profile')
+            }
+
+        } catch (error) {
+            setErrors(prev => ({ ...prev, login: "Erreur réseau. Réessaie plus tard." }));
+        } finally{
+            setLoading(false)
+        }
 
     }
 

@@ -5,7 +5,7 @@ import { useState } from 'react'
 // pages
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
-import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 function AppContent() {
 
@@ -23,13 +23,13 @@ function AppContent() {
             <Route path="/" 
               element={ 
                 !user 
-                  ? <Navigate to="/dashboard" replace /> 
-                  : <Navigate to="/login" replace /> 
+                  ? <Navigate to="/login" replace /> 
+                  : <Navigate to="/profile" replace /> 
               }  
             />
             <Route path='/register' element={<RegisterPage user={user} setUser={setUser} />}/>
             <Route path='/login' element={<LoginPage user={user} setUser={setUser} />}/>
-            <Route path='/dashboard' element={<Dashboard user={user} setUser={setUser} />} />
+            <Route path='/profile' element={<Profile user={user} setUser={setUser} />} />
         </Routes>
     </div>
   )

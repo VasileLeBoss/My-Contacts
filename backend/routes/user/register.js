@@ -49,10 +49,8 @@ router.post('/', async (req, res) => {
     const tokenPayload = {
       id: user._id,
       email: user.email,
-      phoneNumber: user.phoneNumber,
       firstName: user.firstName,
       lastName: user.lastName,
-      contacts: user.contacts
     };
 
     const token = jwt.sign(
@@ -72,7 +70,6 @@ router.post('/', async (req, res) => {
     res.status(201).json({
       message: 'Utilisateur créé avec succès',
       user: tokenPayload,
-      token 
     });
     
   } catch (error) {

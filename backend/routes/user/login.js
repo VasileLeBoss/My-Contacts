@@ -36,7 +36,6 @@ router.post('/', async (req, res) =>{
         phoneNumber: user.phoneNumber,
         firstName: user.firstName,
         lastName: user.lastName,
-        contacts: user.contacts
     };
 
     const token = jwt.sign(

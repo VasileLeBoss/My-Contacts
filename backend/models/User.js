@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 const contactSchema = new mongoose.Schema({
 
-    phoneNumber:{ type: String, required: true, trim:true, unique: true},
-    firstName:{ type:String, required:true, trim:true },
-    lastName:{ type:String, required:true, trim:true },
+    phoneNumberContact:{ type: String, required: true, trim:true, },
+    firstNameContact:{ type:String, required:true, trim:true },
+    lastNameContact:{ type:String, required:true, trim:true },
 
 })
 
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
         trim:true,
         unique: true
     },
-    phoneNumber:{ type: String, required: true, trim:true, unique: true},
+    phoneNumber:{ type: String, required: true, trim:true, unique:true },
     password:{ type:String },
     firstName:{ type:String, required:true, trim:true },
     lastName:{ type:String, required:true, trim:true },
