@@ -132,8 +132,7 @@ function LoginPage({user, setUser}) {
             <div className='footer'>
                 <p><span>Vous avez pas un compte ?</span><Link to="/register">S'inscrire</Link> </p>
             </div>
-            
-
+        
         </div>
     )
 }

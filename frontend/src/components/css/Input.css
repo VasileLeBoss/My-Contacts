@@ -24,6 +24,12 @@
 
     input{
         height: 38px;
+
+        &:focus{
+            outline-color: var(--french-violet);
+            outline-offset: 3px;
+            
+        }
     }
     textarea{
         min-height: calc(38px * 2);
