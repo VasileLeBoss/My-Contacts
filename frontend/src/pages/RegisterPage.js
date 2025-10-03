@@ -156,9 +156,9 @@ function RegisterPage({ setUser }) {
                 }
                 } else {
                 localStorage.setItem('user', JSON.stringify(data.user));
-                localStorage.setItem('token', JSON.stringify(data.token));
+                localStorage.setItem('token', data.token);
                 setUser(data.user);
-                navigate('/profile', { replace: true });
+                navigate('/contacts', { replace: true });
             }
 
         } catch (error) {

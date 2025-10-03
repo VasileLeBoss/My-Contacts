@@ -2,7 +2,7 @@ import './css/Modal.css'
 import Input from './Input';
 import SubmitButton from './SubmitButton';
 
-function AddContact({ onClose, modalOpen, setModalOpen, loading = false, isDisabled = false, user }) {
+function AddContact({ onClose, modalOpen, setModalOpen, loading = false, isDisabled = false, user, onContactAdded }) {
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -10,9 +10,15 @@ function AddContact({ onClose, modalOpen, setModalOpen, loading = false, isDisab
         const data = Object.fromEntries(formData.entries());
 
         try {
+
+            const token = localStorage.getItem('token');
+
             const res = await fetch('/api/contact/add', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                 },
                 body: JSON.stringify({
                     userId: user.id,
                     ...data
@@ -22,8 +28,10 @@ function AddContact({ onClose, modalOpen, setModalOpen, loading = false, isDisab
             const result = await res.json();
 
             if (res.ok) {
-                console.log("Contact ajouté :", result.contact);
                 setModalOpen(false);
+                if (onContactAdded) {
+                    onContactAdded();
+                }
             } else {
                 console.error("Erreur :", result.error);
                 alert(result.error);
@@ -50,7 +58,7 @@ function AddContact({ onClose, modalOpen, setModalOpen, loading = false, isDisab
                         <Input label="Last Name" type="text" name="lastNameContact" placeholder="Enter last name" />
                         <Input label="Phone Number" type="text" name="phoneNumberContact" placeholder="Enter phone number" />
                         <div className='form-actions'>
-                            <SubmitButton label="Add contact" loading={loading} disabled={ loading || isDisabled}/>
+                            <SubmitButton label="Add contact" loading={loading} disabled={ loading || isDisabled} />
                         </div>
                     </form>
                 </div>
