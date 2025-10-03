@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import './css/Layaut.css';
 import Menu from '../components/Menu';
 
 
 function Profile({user, setUser}) {
-
-
-    const [ contacts, setContacts] = useState([]);
 
     return(
         <div className="layaut conteiner">

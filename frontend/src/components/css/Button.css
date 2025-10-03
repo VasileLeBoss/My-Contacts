@@ -1,0 +1,30 @@
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 4px 12px;
+
+    border: 0;
+    background-color: transparent;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    ion-icon{
+        font-size: 1.2rem;
+    }
+
+    &.btn-primary{
+        background-color: var(--white);
+        color: var(--black);
+        border-radius: 16px;
+        border: 1px solid var(--black);
+
+        &:hover{
+            background-color: var(--tekhelet);
+            color: var(--white);
+            border-color: var(--white) ;
+        }
+    }
+}

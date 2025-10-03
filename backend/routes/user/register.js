@@ -39,8 +39,7 @@ router.post('/', async (req, res) => {
       phoneNumber,
       password: hashedPassword,
       firstName,
-      lastName,
-      contacts: []
+      lastName
     });
 
     // enregistrement

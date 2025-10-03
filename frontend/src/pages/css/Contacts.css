@@ -1,0 +1,8 @@
+.contacts-list{
+    margin-top: 32px;
+
+    h4{
+        color: var(--gray);
+        
+    }
+}

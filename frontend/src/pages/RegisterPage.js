@@ -126,6 +126,7 @@ function RegisterPage({ setUser }) {
             password: validate('password',formData.password),
             confirmPassword: validate('confirmPassword',formData.confirmPassword),
         }
+        
         setErrors(newErrors);
 
 
@@ -192,7 +193,7 @@ function RegisterPage({ setUser }) {
                 <Input type="password" onChange={handleChange} name="password" value={formData.password} label="Mot de passe" placeholder="Mot de passe" required error={errors.password} />
                 <Input type="password" onChange={handleChange}  name="confirmPassword" value={formData.confirmPassword} label="Confirmez le mot de passe" placeholder="Répétez votre mot de passe" required error={errors.confirmPassword} />
             </div>
-            <SubmitButton label="S'inscrire" loading={loading} disabled={ loading || isDisabled}/>
+                <SubmitButton label="S'inscrire" loading={loading} disabled={ loading || isDisabled}/>
             </form>
             <div className='footer'>
                 <p><span>Vous avez déjà un compte ?</span><Link to="/login">Se connecter</Link> </p>

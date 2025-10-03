@@ -30,7 +30,7 @@ function Menu({ user, setUser }) {
             <div className='content-menu'>
 
                 <h4>Menu</h4>
-
+                
                 <NavLink to='/contacts' className={({ isActive }) => isActive ? 'active-link' : '' } >
                     <ion-icon name="list-outline"></ion-icon>
                     <span>Contacts</span>

@@ -8,5 +8,19 @@
         width: 100%;
         margin-left: var(--menu-width) ;
         padding-inline: 32px;
+        
+    
+        .main-conteiner{
+            background-color: var(--white);
+            min-height:100dvh;
+            padding-top: 12px;
+            padding-inline: 32px;
+
+            .header-conteiner{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
     }
 }

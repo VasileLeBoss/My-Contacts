@@ -64,6 +64,35 @@
           "500": { "description": "Erreur serveur" }
         }
       }
+    },
+    "/contact/add": {
+      "post": {
+        "summary": "Créer un nouveau contact",
+        "tags": ["Contacts"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": { "type": "string", "example": "1234567azerty" },
+                  "phoneNumberContact": { "type": "string", "example": "0624133141" },
+                  "firstNameContact": { "type": "string", "example": "Jane" },
+                  "lastNameContact": { "type": "string", "example": "Doe" }
+                },
+                "required": ["userId","phoneNumberContact","firstNameContact","lastNameContact"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Utilisateur connecté" },
+          "404": { "description": "Email et mot de passe requis" },
+          "401": { "description": "Identifiants invalides" },
+          "500": { "description": "Erreur serveur" }
+        }
+      }
     }
   }
 }
