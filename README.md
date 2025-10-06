@@ -15,7 +15,7 @@ Elle permet à un utilisateur de créer un compte, se connecter et gérer ses co
 ## URL
 
 ```
-https://mycontacts.alwaysdata.net/profile
+https://mycontacts.alwaysdata.net/
 ```
 
 ---
