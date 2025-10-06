@@ -2,9 +2,9 @@ menu{
     width: 100%;
     min-width: var(--menu-width);
     max-width: fit-content;
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: calc(-1 * var(--menu-width));
+    left: 0;
     height: 100dvh;
     background-color: var(--white);
     padding-block: 12px;

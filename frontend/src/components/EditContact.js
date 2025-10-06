@@ -2,7 +2,7 @@ import './css/Modal.css'
 import Input from './Input';
 import SubmitButton from './SubmitButton';
 
-function AddContact({ onClose, modalOpen, setModalAddOpen, loading = false, isDisabled = false, user, onContactAdded }) {
+function AddContact({ onClose, contactData, modalOpen, setModalOpen, loading = false, isDisabled = false, user, onContactEdited }) {
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -13,7 +13,7 @@ function AddContact({ onClose, modalOpen, setModalAddOpen, loading = false, isDi
 
             const token = localStorage.getItem('token');
 
-            const res = await fetch('/api/contact/add', {
+            const res = await fetch(`/api/contact/edit/${data.id}`, {
                 method: 'POST',
                 headers: { 
                     "Content-Type": "application/json",
@@ -28,9 +28,9 @@ function AddContact({ onClose, modalOpen, setModalAddOpen, loading = false, isDi
             const result = await res.json();
 
             if (res.ok) {
-                setModalAddOpen(false);
-                if (onContactAdded) {
-                    onContactAdded();
+                setModalOpen(false);
+                if (onContactEdited) {
+                    onContactEdited();
                 }
             } else {
                 console.error("Erreur :", result.error);
@@ -47,16 +47,16 @@ function AddContact({ onClose, modalOpen, setModalAddOpen, loading = false, isDi
         <div className="modal" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <div className='modal-header'>
-                    <h2>New Contact</h2>
+                    <h2>Edit Contact</h2>
                     <span className='close' onClick={onClose}>
                         <ion-icon name="close-outline"></ion-icon>
                     </span>
                 </div>
                 <div className='modal-body'>
                     <form onSubmit={onSubmit}>
-                        <Input label="First Name" type="text" name="firstNameContact" placeholder="Enter first name" />
-                        <Input label="Last Name" type="text" name="lastNameContact" placeholder="Enter last name" />
-                        <Input label="Phone Number" type="text" name="phoneNumberContact" placeholder="Enter phone number" />
+                        <Input label="First Name" type="text" name="firstNameContact" placeholder="Enter first name" value={contactData.firstNameContact} />
+                        <Input label="Last Name" type="text" name="lastNameContact" placeholder="Enter last name" value={contactData.lastNameContact} />
+                        <Input label="Phone Number" type="text" name="phoneNumberContact" placeholder="Enter phone number" value={contactData.phoneNumberContact} />
                         <div className='form-actions'>
                             <SubmitButton label="Add contact" loading={loading} disabled={ loading || isDisabled} />
                         </div>
