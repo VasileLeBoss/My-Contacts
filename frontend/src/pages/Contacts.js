@@ -29,21 +29,24 @@ function Contacts({user, setUser}) {
             const result = await res.json();
             if (res.ok) {
                 setContacts(result.contacts);
-                setLoading(false);
             } else {
                 console.error("Erreur :", result.error);
                 alert(result.error);
-                setLoading(false);
             }
         } catch (err) {
             console.error("Erreur serveur :", err);
             alert("Impossible de récupérer les contacts.");
+        } finally {
+            setLoading(false);
         }
     };
 
-    useEffect(() => {
+
+
+    useEffect(() => {        
         fetchContacts();
-    }, []);
+    }, []); 
+
 
     const editContact = (contact) => {
         setEditingContact(contact);

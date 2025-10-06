@@ -3,7 +3,7 @@
   "info": {
     "title": "API MyContacts",
     "version": "1.0.0",
-    "description": "Documentation des routes Auth de MyContacts"
+    "description": "Documentation complète des routes Auth et Contacts de MyContacts"
   },
   "servers": [
     { "url": "http://localhost:3000/api" }
@@ -26,7 +26,7 @@
                   "firstName": { "type": "string", "example": "John" },
                   "lastName": { "type": "string", "example": "Doe" }
                 },
-                "required": ["email","phoneNumber","password","firstName","lastName"]
+                "required": ["email", "phoneNumber", "password", "firstName", "lastName"]
               }
             }
           }
@@ -52,7 +52,7 @@
                   "email": { "type": "string", "example": "user@example.com" },
                   "password": { "type": "string", "example": "MotDePasse123" }
                 },
-                "required": ["email","password"]
+                "required": ["email", "password"]
               }
             }
           }
@@ -81,15 +81,152 @@
                   "firstNameContact": { "type": "string", "example": "Jane" },
                   "lastNameContact": { "type": "string", "example": "Doe" }
                 },
-                "required": ["userId","phoneNumberContact","firstNameContact","lastNameContact"]
+                "required": ["userId", "phoneNumberContact", "firstNameContact", "lastNameContact"]
               }
             }
           }
         },
         "responses": {
-          "200": { "description": "Utilisateur connecté" },
-          "404": { "description": "Email et mot de passe requis" },
-          "401": { "description": "Identifiants invalides" },
+          "201": { "description": "Contact créé avec succès" },
+          "400": { "description": "Champs manquants" },
+          "500": { "description": "Erreur serveur" }
+        }
+      }
+    },
+    "/contact/edit/{idContact}": {
+      "patch": {
+        "summary": "Modifier un contact existant",
+        "tags": ["Contacts"],
+        "parameters": [
+          {
+            "name": "idContact",
+            "in": "path",
+            "required": true,
+            "description": "ID du contact à modifier",
+            "schema": { "type": "string", "example": "661f1ef1d0e84f4b9c2c3c4f" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": { "type": "string", "example": "6512bd43d9caa6e02c990b0a" },
+                  "phoneNumberContact": { "type": "string", "example": "0612345678" },
+                  "firstNameContact": { "type": "string", "example": "Alice" },
+                  "lastNameContact": { "type": "string", "example": "Dupont" }
+                },
+                "required": ["userId", "phoneNumberContact", "firstNameContact", "lastNameContact"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contact mis à jour avec succès",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Contact mis à jour avec succès",
+                  "contact": {
+                    "_id": "661f1ef1d0e84f4b9c2c3c4f",
+                    "userId": "6512bd43d9caa6e02c990b0a",
+                    "firstNameContact": "Alice",
+                    "lastNameContact": "Dupont",
+                    "phoneNumberContact": "0612345678"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Champs manquants ou ID non fourni" },
+          "403": { "description": "Utilisateur non autorisé à modifier ce contact" },
+          "404": { "description": "Utilisateur ou contact non trouvé" },
+          "500": { "description": "Erreur serveur interne" }
+        }
+      }
+    },
+    "/contact/all/{userId}": {
+      "get": {
+        "summary": "Récupérer tous les contacts d’un utilisateur",
+        "tags": ["Contacts"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "ID de l'utilisateur",
+            "schema": { "type": "string", "example": "6512bd43d9caa6e02c990b0a" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste des contacts récupérée avec succès",
+            "content": {
+              "application/json": {
+                "example": {
+                  "contacts": [
+                    {
+                      "_id": "661f1ef1d0e84f4b9c2c3c4f",
+                      "firstNameContact": "Jane",
+                      "lastNameContact": "Doe",
+                      "phoneNumberContact": "0601020304"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": { "description": "ID utilisateur requis" },
+          "404": { "description": "Utilisateur non trouvé" },
+          "500": { "description": "Erreur serveur" }
+        }
+      }
+    },
+    "/contact/delete/{idContact}": {
+      "delete": {
+        "summary": "Supprimer un contact existant",
+        "tags": ["Contacts"],
+        "parameters": [
+          {
+            "name": "idContact",
+            "in": "path",
+            "required": true,
+            "description": "ID du contact à supprimer",
+            "schema": { "type": "string", "example": "661f1ef1d0e84f4b9c2c3c4f" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": { "type": "string", "example": "6512bd43d9caa6e02c990b0a" }
+                },
+                "required": ["userId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contact supprimé avec succès",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Contact supprimé avec succès",
+                  "contactId": "661f1ef1d0e84f4b9c2c3c4f"
+                }
+              }
+            }
+          },
+          "400": { "description": "ID du contact ou utilisateur manquant" },
+          "403": { "description": "Utilisateur non autorisé à supprimer ce contact" },
+          "404": { "description": "Utilisateur ou contact non trouvé" },
           "500": { "description": "Erreur serveur" }
         }
       }
