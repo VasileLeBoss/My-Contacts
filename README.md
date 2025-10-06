@@ -149,7 +149,6 @@ Authorization: Bearer <token>
 | 01 | `feature/auth` | Inscription / Connexion fonctionnelles |
 | 02 | `feature/contacts` | CRUD complet des contacts |
 | 03 | `feature/swagger` | Documentation Swagger complète |
-| 04 | `feature/tests` | Tests unitaires et d’intégration |
 
 ---
 
