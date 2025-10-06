@@ -113,7 +113,7 @@ function Contacts({user, setUser}) {
             )}
 
             { modalEditOpen && (
-                <EditContact onClose={() => setModalEditOpen(false)} contactData={editingContact} modalEditOpen={modalEditOpen} setModalEditOpen={setModalEditOpen} user={user} onContactEdited={fetchContacts}/>
+                <EditContact onClose={() => setModalEditOpen(false)} contactData={editingContact} modalEditOpen={modalEditOpen} setModalEditOpen={setModalEditOpen} user={user} setEditingContact={setEditingContact} onContactEdited={fetchContacts}/>
             )}
             
             {modalDeleteOpen && (

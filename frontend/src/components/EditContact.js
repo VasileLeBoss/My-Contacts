@@ -2,7 +2,8 @@ import './css/Modal.css'
 import Input from './Input';
 import SubmitButton from './SubmitButton';
 
-function AddContact({ onClose, contactData, modalOpen, setModalOpen, loading = false, isDisabled = false, user, onContactEdited }) {
+function AddContact({ onClose, contactData, setEditingContact, modalEditOpen, setModalEditOpen, loading = false, isDisabled = false, user, onContactEdited }) {
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -10,11 +11,10 @@ function AddContact({ onClose, contactData, modalOpen, setModalOpen, loading = f
         const data = Object.fromEntries(formData.entries());
 
         try {
-
             const token = localStorage.getItem('token');
 
-            const res = await fetch(`/api/contact/edit/${data.id}`, {
-                method: 'POST',
+            const res = await fetch(`/api/contact/edit/${contactData._id}`, {
+                method: 'PATCH',
                 headers: { 
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`,
@@ -28,7 +28,7 @@ function AddContact({ onClose, contactData, modalOpen, setModalOpen, loading = f
             const result = await res.json();
 
             if (res.ok) {
-                setModalOpen(false);
+                setModalEditOpen(false);
                 if (onContactEdited) {
                     onContactEdited();
                 }
@@ -42,6 +42,13 @@ function AddContact({ onClose, contactData, modalOpen, setModalOpen, loading = f
         }
     };
 
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setEditingContact((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
 
     return(
         <div className="modal" onClick={onClose}>
@@ -54,11 +61,11 @@ function AddContact({ onClose, contactData, modalOpen, setModalOpen, loading = f
                 </div>
                 <div className='modal-body'>
                     <form onSubmit={onSubmit}>
-                        <Input label="First Name" type="text" name="firstNameContact" placeholder="Enter first name" value={contactData.firstNameContact} />
-                        <Input label="Last Name" type="text" name="lastNameContact" placeholder="Enter last name" value={contactData.lastNameContact} />
-                        <Input label="Phone Number" type="text" name="phoneNumberContact" placeholder="Enter phone number" value={contactData.phoneNumberContact} />
+                        <Input onChange={onChange} label="First Name" type="text" name="firstNameContact" placeholder="Enter first name" value={contactData.firstNameContact} />
+                        <Input onChange={onChange} label="Last Name" type="text" name="lastNameContact" placeholder="Enter last name" value={contactData.lastNameContact} />
+                        <Input onChange={onChange} label="Phone Number" type="text" name="phoneNumberContact" placeholder="Enter phone number" value={contactData.phoneNumberContact} />
                         <div className='form-actions'>
-                            <SubmitButton label="Add contact" loading={loading} disabled={ loading || isDisabled} />
+                            <SubmitButton label="Save" loading={loading} disabled={ loading || isDisabled} />
                         </div>
                     </form>
                 </div>
