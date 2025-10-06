@@ -38,13 +38,13 @@ function Menu({ user, setUser }) {
 
                 <NavLink to="/profile" className={({ isActive }) => isActive ? 'active-link' : '' }>
                     <ion-icon name="person-outline"></ion-icon>
-                    <span>My Profile</span>
+                    <span>Mon profil</span>
                 </NavLink>
             </div>
 
             <NavLink to="/login" onClick={handleLogout} className='footer-menu'>
                 <ion-icon name="log-out-outline"></ion-icon>
-                <span>Logout</span>
+                <span>Déconnexion</span>
             </NavLink>
         </menu>
     )

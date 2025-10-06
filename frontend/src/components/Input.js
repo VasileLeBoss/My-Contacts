@@ -12,6 +12,8 @@ function Input({
   required = false,
   autoFocus = false,
   aditionalInfo,
+  readOnly = false,
+  disabled = false,
   error = ""
 }) {
   return (
@@ -31,6 +33,8 @@ function Input({
         placeholder={placeholder}
         required={required}
         autoFocus={autoFocus}
+        readOnly={readOnly}
+        disabled={disabled}
         aria-describedby={`${name}-info ${error ? `${name}-error` : ''}`}
         aria-invalid={!!error}
       />

@@ -44,20 +44,20 @@ function DeleteContact({ onClose, contactData, modalDeleteOpen, setModalDeleteOp
         <div className="modal" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <div className='modal-header'>
-                    <h2>Delete Contact</h2>
+                    <h2>Supprimer le contact</h2>
                     <span className='close' onClick={onClose}>
                         <ion-icon name="close-outline"></ion-icon>
                     </span>
                 </div>
                 <div className='modal-body'>
-                        <p>Are you sure you want to delete this contact?</p>
+                        <p>Êtes-vous sûr de vouloir supprimer ce contact ?</p>
                         <h4>{contactData.firstNameContact} {contactData.lastNameContact} - {contactData.phoneNumberContact}</h4>
 
                         <div className='form-actions-delete'>
                             <Button className='btn-secondary' onClick={onClose}>
-                                <span>Cancel</span>
+                                <span>Annuler</span>
                             </Button>
-                            <SubmitButton className='button-danger' onClick={onSubmit} label="Delete" loading={loading} disabled={ loading || isDisabled} />
+                            <SubmitButton className='button-danger' onClick={onSubmit} label="Supprimer" loading={loading} disabled={ loading || isDisabled} />
                         </div>
                 </div>
             </div>

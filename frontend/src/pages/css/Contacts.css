@@ -33,6 +33,13 @@
             }
             .number{
                 color: var(--gray);
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                ion-icon{
+                    font-size: 0.8rem;
+                }
             }
 
             .actions{

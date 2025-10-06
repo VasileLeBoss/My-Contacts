@@ -47,18 +47,18 @@ function AddContact({ onClose, modalOpen, setModalAddOpen, loading = false, isDi
         <div className="modal" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <div className='modal-header'>
-                    <h2>New Contact</h2>
+                    <h2>Nouveau contact</h2>
                     <span className='close' onClick={onClose}>
                         <ion-icon name="close-outline"></ion-icon>
                     </span>
                 </div>
                 <div className='modal-body'>
                     <form onSubmit={onSubmit}>
-                        <Input label="First Name" type="text" name="firstNameContact" placeholder="Enter first name" />
-                        <Input label="Last Name" type="text" name="lastNameContact" placeholder="Enter last name" />
-                        <Input label="Phone Number" type="text" name="phoneNumberContact" placeholder="Enter phone number" />
+                        <Input label="Nom" type="text" name="firstNameContact" placeholder="Entrez le nom" autoFocus={true} />
+                        <Input label="Prenom" type="text" name="lastNameContact" placeholder="Entrez le prénom" />
+                        <Input label="Numéro téléphone" type="number" name="phoneNumberContact" placeholder="Entrez le numéro de téléphone" />
                         <div className='form-actions'>
-                            <SubmitButton label="Add contact" loading={loading} disabled={ loading || isDisabled} />
+                            <SubmitButton label="Ajouter le contact" loading={loading} disabled={ loading || isDisabled} />
                         </div>
                     </form>
                 </div>

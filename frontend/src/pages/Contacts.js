@@ -70,19 +70,19 @@ function Contacts({user, setUser}) {
                         <div className='header-actions'>
                             <Button className='btn-primary' onClick={() => setModalAddOpen(true)}>
                                 <ion-icon name="add-outline"></ion-icon>
-                                <span>New contact</span>
+                                <span>Nouveau</span>
                             </Button>
                         </div>
                     </div>
 
                     <div className='contacts-list'>
                         {loading ? (
-                            <h4>Loading contacts...</h4>
+                            <h4>Chargement des contacts...</h4>
                         ) : (
                             <>
                                 {contacts.length === 0 ? (
                                     <>
-                                    <h4>No contacts available.</h4>
+                                    <h4>Aucun contact disponible.</h4>
                                     </>
                                 ) : (
                                     <ul className='list'>
@@ -91,7 +91,7 @@ function Contacts({user, setUser}) {
                                             <li className='contact' key={index}>
                                                 <div>
                                                     <div className='name'>{contact.firstNameContact} {contact.lastNameContact} </div>
-                                                    <div className='number'>{contact.phoneNumberContact}</div>
+                                                    <div className='number'><ion-icon name="call-outline"></ion-icon> {contact.phoneNumberContact}</div>
                                                 </div>
 
                                                 <div className='actions'>

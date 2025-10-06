@@ -54,7 +54,7 @@ function EditContact({ onClose, contactData, setEditingContact, modalEditOpen, s
         <div className="modal" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <div className='modal-header'>
-                    <h2>Edit Contact</h2>
+                    <h2>Modifier le contact</h2>
                     <span className='close' onClick={onClose}>
                         <ion-icon name="close-outline"></ion-icon>
                     </span>
@@ -63,9 +63,9 @@ function EditContact({ onClose, contactData, setEditingContact, modalEditOpen, s
                     <form onSubmit={onSubmit}>
                         <Input onChange={onChange} label="First Name" type="text" name="firstNameContact" placeholder="Enter first name" value={contactData.firstNameContact} />
                         <Input onChange={onChange} label="Last Name" type="text" name="lastNameContact" placeholder="Enter last name" value={contactData.lastNameContact} />
-                        <Input onChange={onChange} label="Phone Number" type="text" name="phoneNumberContact" placeholder="Enter phone number" value={contactData.phoneNumberContact} />
+                        <Input onChange={onChange} label="Phone Number" type="number" name="phoneNumberContact" placeholder="Enter phone number" value={contactData.phoneNumberContact} />
                         <div className='form-actions'>
-                            <SubmitButton label="Save" loading={loading} disabled={ loading || isDisabled} />
+                            <SubmitButton label="Enregistrer" loading={loading} disabled={ loading || isDisabled} />
                         </div>
                     </form>
                 </div>

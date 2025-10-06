@@ -1,0 +1,10 @@
+.profile-conteiner{
+    margin-top: 32px;
+
+
+    .info{
+        margin-top: 16px;
+        font-size: 0.9rem;
+        color: var(--gray);
+    }
+}
