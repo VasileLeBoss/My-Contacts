@@ -2,7 +2,7 @@ import './css/Modal.css'
 import Input from './Input';
 import SubmitButton from './SubmitButton';
 
-function AddContact({ onClose, contactData, setEditingContact, modalEditOpen, setModalEditOpen, loading = false, isDisabled = false, user, onContactEdited }) {
+function EditContact({ onClose, contactData, setEditingContact, modalEditOpen, setModalEditOpen, loading = false, isDisabled = false, user, onContactEdited }) {
 
 
     const onSubmit = async (e) => {
@@ -38,7 +38,7 @@ function AddContact({ onClose, contactData, setEditingContact, modalEditOpen, se
             }
         } catch (err) {
             console.error("Erreur serveur :", err);
-            alert("Impossible d'ajouter le contact.");
+            alert("Impossible de modifier le contact.");
         }
     };
 
@@ -74,4 +74,4 @@ function AddContact({ onClose, contactData, setEditingContact, modalEditOpen, se
     )
 }
 
-export default AddContact;
+export default EditContact;

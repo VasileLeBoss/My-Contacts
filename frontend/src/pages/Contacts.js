@@ -5,6 +5,7 @@ import './css/Contacts.css';
 import Button from '../components/Button';
 import AddContact from '../components/AddContact';
 import EditContact from '../components/EditContact';
+import DeleteContact from '../components/DeleteContact';
 
 function Contacts({user, setUser}) {
 
@@ -49,6 +50,11 @@ function Contacts({user, setUser}) {
         setModalEditOpen(true);
     }
 
+    const deleteContact = (contact) => {
+        setEditingContact(contact);
+        setModalDeleteOpen(true);
+    }
+
     return(
         <div className="layaut conteiner">
             <div className='grid'>
@@ -90,7 +96,7 @@ function Contacts({user, setUser}) {
                                                         <ion-icon name="pencil-outline"></ion-icon>
                                                     </Button>
 
-                                                    <Button className='icon-action btn-danger' onClick={() => setModalDeleteOpen(true)}>
+                                                    <Button className='icon-action btn-danger' onClick={() => deleteContact(contact)}>
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </Button>
                                                     
@@ -117,7 +123,7 @@ function Contacts({user, setUser}) {
             )}
             
             {modalDeleteOpen && (
-                <div>Delete Modal</div>
+                <DeleteContact onClose={() => setModalDeleteOpen(false)} contactData={editingContact} modalDeleteOpen={modalDeleteOpen} setModalDeleteOpen={setModalDeleteOpen} user={user} onContactDeleted={fetchContacts}/>
             )}
         </div>
     )

@@ -32,5 +32,11 @@
         .modal-body{
             margin-block: 16px;
         }
+
+        .form-actions-delete{
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
     }
 }

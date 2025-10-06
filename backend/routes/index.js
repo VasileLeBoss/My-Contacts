@@ -7,6 +7,7 @@ const loginController = require('./user/login')
 const addContactController = require('./contact/addContact');
 const getAllContactController = require('./contact/getAllContact');
 const editContactController = require('./contact/editContact');
+const deleteContactController = require('./contact/deleteContact');
 
 
 // importation du middleware
@@ -20,5 +21,6 @@ router.use('/auth/login', loginController );
 router.use('/contact/add',authMiddleware, addContactController);
 router.use('/contact/all',authMiddleware, getAllContactController);
 router.use('/contact/edit',authMiddleware, editContactController);
+router.use('/contact/delete',authMiddleware, deleteContactController);
 
 module.exports = router;

@@ -26,6 +26,18 @@
 
     }
 
+    .button-danger{
+        background-color: var(--white);
+        color: var(--black);
+        border: 1px solid var(--black);
+        
+        &:hover{
+            background-color: var(--red);
+            color: var(--white);
+            border-color: var(--white) ;
+        }
+    }
+
     div:has(.spinner){
         display: flex;
         align-items: center;
