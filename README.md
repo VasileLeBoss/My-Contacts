@@ -12,6 +12,13 @@ Elle permet à un utilisateur de créer un compte, se connecter et gérer ses co
 
 ---
 
+## URL
+
+```
+https://mycontacts.alwaysdata.net/
+```
+
+---
 ## 1. Installation
 
 Clone le dépôt et installe les dépendances :
@@ -33,7 +40,7 @@ Crée un fichier `.env` à la racine :
 ```env
 NODE_ENV=
 PORT=
-MONGODB_URI=
+MONGO_URI=
 JWT_SECRET=
 ```
 
