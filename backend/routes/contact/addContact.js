@@ -4,6 +4,7 @@ const User = require('../../models/User');
 const Contact = require('../../models/Contact');
 
 router.post('/', async (req, res) =>{
+    
     const { userId, phoneNumberContact, firstNameContact, lastNameContact } = req.body;
 
     if (!userId || !phoneNumberContact || !firstNameContact || !lastNameContact) {

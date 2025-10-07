@@ -19,7 +19,7 @@ app.use(cors({
 }));
 
 // connexion MongoDB
-mongoose.connect(process.env.MONGO_URI) 
+mongoose.connect(process.env.NODE_ENV === 'test' ? process.env.MONGO_URI_TEST : process.env.MONGO_URI) 
   .then(() => {
       console.log('✅ MongoDB connecté');
       console.log('-------------------------------');
@@ -47,9 +47,16 @@ if (isProduction) {
   });
 }
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log('-------------------------------');
-    console.log(`Serveur lancé sur le port ${PORT}`);
-    console.log('-------------------------------');
-});
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+      console.log('-------------------------------');
+      console.log(`Serveur lancé sur le port ${PORT}`);
+      console.log('-------------------------------');
+  });
+}
+
+
+module.exports = app;
+
+module.exports = app; 

@@ -35,16 +35,28 @@ npm install
 
 ```
 
-Crée un fichier `.env` à la racine :
+Crée un fichier `.env` à la racine du backend :
 
 ```env
-NODE_ENV=
-PORT=
-MONGO_URI=
-JWT_SECRET=
+NODE_ENV=dev
+PORT=5000
+MONGO_URI=mongodb+srv://...
+JWT_SECRET=your_secret_key
 ```
 
 ---
+
+## Lancement
+
+### Démarrer le serveur :
+```bash
+npm start
+```
+
+### Démarrer le frontend :
+```bash
+npm start
+```
 
 
 ## 2. Endpoints
@@ -137,6 +149,56 @@ Authorization: Bearer <token>
 
 ---
 
+## Tests (Jest + Supertest + MongoDB)
+
+Crée un fichier `.env.test` à la racine du backend :
+
+```env
+NODE_ENV=test
+PORT=5001
+MONGO_URI=mongodb+srv://...
+JWT_SECRET=your_secret_key
+```
+
+
+Les tests vérifient l’intégrité des routes principales (authentification, ajout, édition, suppression, récupération de contacts).  
+Chaque test exécute une instance MongoDB de test indépendante grâce à un `setup.js` :
+
+```js
+beforeAll(async () => {
+  await mongoose.connect(process.env.MONGO_URI_TEST);
+});
+
+afterEach(async () => {
+  const collections = await mongoose.connection.db.collections();
+  for (let collection of collections) {
+    await collection.deleteMany();
+  }
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
+});
+```
+
+### Lancer les tests :
+```bash
+npm test
+```
+
+### Exemple de résultat :
+```
+PASS  tests/contactAdd.test.js
+PASS  tests/contactEdit.test.js
+PASS  tests/contactDelete.test.js
+
+Test Suites: 3 passed, 3 total
+Tests:       15 passed, 15 total
+Time:        3.5 s
+```
+
+---
+
 
 ## 3. OpenAPI + Swagger
 
@@ -164,3 +226,7 @@ Authorization: Bearer <token>
 - Authentification par **JWT Bearer**  
 - Middleware de vérification du token sur toutes les routes `/api/contact/*`  
 - Swagger auto-généré à partir de `swagger.yaml`  
+- Séparation stricte **frontend / backend**  
+- Middleware d’authentification activable/désactivable pour les tests  
+- CI prête pour intégration Docker ou GitHub Actions  
+
