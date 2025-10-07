@@ -4,7 +4,6 @@ import SubmitButton from './SubmitButton';
 
 function EditContact({ onClose, contactData, setEditingContact, modalEditOpen, setModalEditOpen, loading = false, isDisabled = false, user, onContactEdited }) {
 
-
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
